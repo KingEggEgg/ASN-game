@@ -10,7 +10,7 @@ const CAPTIONS=[
   ['Scene 4','Create the ASN, choose the pallet, and help Receiving move again.']
 ];
 const $=id=>document.getElementById(id);
-const state={scene:0,selectedChip:null,selectedPallet:null,start:null,secs:0,timer:null,pending:null};
+const state={scene:0,selectedPallet:null,start:null,secs:0,timer:null,pending:null,pickerField:null,pickerMode:null};
 const scenes=[...document.querySelectorAll('.scene')];
 
 function shuffle(a){a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
@@ -20,22 +20,10 @@ function showPage(id){document.querySelectorAll('.page').forEach(p=>p.classList.
 function setTheme(mode){const light=mode==='light';document.body.classList.toggle('light',light);$('themeIcon').textContent=light?'🌙':'☀️';$('themeLabel').textContent=light?'Dark':'Light';try{localStorage.setItem('asnTheme',light?'light':'dark')}catch{}}
 function toggleTheme(){setTheme(document.body.classList.contains('light')?'dark':'light')}
 
-function replaySceneAnimation(scene){
-  const active=scenes[scene];
-  active.querySelectorAll('*').forEach(el=>{el.style.animation='none';void el.offsetWidth;el.style.animation=''})
-}
-function updateScene(i){
-  state.scene=i;
-  scenes.forEach((s,n)=>s.classList.toggle('active',n===i));
-  $('storyStep').textContent=`Scene ${i+1} / ${scenes.length}`;
-  $('storyBack').disabled=i===0;
-  $('storyNext').textContent=i===scenes.length-1?'Replay Scene':'Next';
-  const [title,text]=CAPTIONS[i];
-  $('storyCaption').innerHTML=`<strong>${title}</strong><span>${text}</span>`;
-  replaySceneAnimation(i)
-}
-function nextScene(){if(state.scene===scenes.length-1)replaySceneAnimation(state.scene);else updateScene(state.scene+1)}
-function prevScene(){if(state.scene>0)updateScene(state.scene-1)}
+function replaySceneAnimation(scene){const active=scenes[scene];active.querySelectorAll('*').forEach(el=>{el.style.animation='none';void el.offsetWidth;el.style.animation=''})}
+function updateScene(i){state.scene=i;scenes.forEach((s,n)=>s.classList.toggle('active',n===i));$('storyStep').textContent=`Scene ${i+1} / ${scenes.length}`;$('storyBack').disabled=i===0;$('storyNext').textContent=i===scenes.length-1?'Replay Scene':'Next';const [title,text]=CAPTIONS[i];$('storyCaption').innerHTML=`<strong>${title}</strong><span>${text}</span>`;replaySceneAnimation(i)}
+function nextScene(){if(state.scene===scenes.length-1) replaySceneAnimation(state.scene); else updateScene(state.scene+1)}
+function prevScene(){if(state.scene>0) updateScene(state.scene-1)}
 
 function tick(){state.secs=state.start?Math.floor((Date.now()-state.start)/1000):0;const t=fmt(state.secs);['timer1','timer2'].forEach(id=>{$(id).textContent=t;$(id).classList.toggle('hot',state.secs>=50)})}
 function startTimer(){clearInterval(state.timer);state.start=Date.now();state.secs=0;tick();state.timer=setInterval(tick,250)}
@@ -47,54 +35,72 @@ function clearMessages(){['asnMessage','huMessage'].forEach(id=>{$(id).textConte
 function overlay(icon,title,text,callback){state.pending=callback;$('transitionIcon').textContent=icon;$('transitionTitle').textContent=title;$('transitionText').textContent=text;$('overlay').classList.add('show');$('overlay').setAttribute('aria-hidden','false')}
 function continueOverlay(){$('overlay').classList.remove('show');$('overlay').setAttribute('aria-hidden','true');const cb=state.pending;state.pending=null;if(cb)cb()}
 
+function openPicker(title,subtitle,buttonsHtml,mode,field=null){state.pickerMode=mode;state.pickerField=field;$('pickerTitle').textContent=title;$('pickerSubtitle').textContent=subtitle;$('pickerChoices').innerHTML=buttonsHtml;$('pickerOverlay').classList.add('show');$('pickerOverlay').setAttribute('aria-hidden','false')}
+function closePicker(){$('pickerOverlay').classList.remove('show');$('pickerOverlay').setAttribute('aria-hidden','true');state.pickerMode=null;state.pickerField=null}
+
 function renderFields(){
   const host=$('fieldList');host.innerHTML='';
   ORDER.forEach(field=>{
     const el=document.createElement('div');el.className='field-card';
-    el.innerHTML=`<div class="field-head"><span>${LABELS[field]}</span><button class="clear-btn" data-clear="${field}">Clear</button></div><button class="answer-slot" data-field="${field}">Tap here after selecting ${LABELS[field]}</button>`;
-    host.appendChild(el)
+    el.innerHTML=`<div class="field-head"><span>${LABELS[field]}</span><button class="clear-btn" data-clear="${field}">Clear</button></div><button class="answer-slot" data-field="${field}">Tap to choose ${LABELS[field]}</button>`;
+    host.appendChild(el);
   })
 }
-function renderOptions(){
-  const host=$('optionGroups');host.innerHTML='';
-  ORDER.forEach(field=>{
-    const g=document.createElement('section');g.className='option-group';g.innerHTML=`<div class="option-title">${LABELS[field]}</div>`;
-    const chips=document.createElement('div');chips.className='chips';
-    shuffle(OPTIONS[field]).forEach(value=>{const b=document.createElement('button');b.className='chip';b.dataset.field=field;b.dataset.value=value;b.textContent=value;chips.appendChild(b)});
-    g.appendChild(chips);host.appendChild(g)
-  })
+function renderPalletPreview(){
+  const box=$('palletPreview');
+  if(!state.selectedPallet){box.textContent='No pallet selected yet.';box.classList.remove('filled');return}
+  const [name,size,hu]=PALLETS[state.selectedPallet];
+  box.innerHTML=`<strong>${name}</strong><span>${size}</span><span>${hu}</span>`;box.classList.add('filled')
 }
-function renderPallets(){
-  const host=$('palletChoices');host.innerHTML='';
-  shuffle(Object.keys(PALLETS)).forEach(key=>{
-    const b=document.createElement('button');b.className='pallet-choice';b.dataset.value=key;
-    const [name,size,hu]=PALLETS[key];b.innerHTML=`<strong>${name}</strong><small>${size}</small><small>${hu}</small>`;
-    b.onclick=()=>{host.querySelectorAll('.pallet-choice').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');state.selectedPallet=key};host.appendChild(b)
-  })
+function clearField(field){const slot=document.querySelector(`.answer-slot[data-field="${field}"]`);if(!slot)return;slot.textContent=`Tap to choose ${LABELS[field]}`;slot.dataset.value='';slot.classList.remove('filled','correct','wrong')}
+function resetGame(){state.selectedPallet=null;clearMessages();renderFields();renderPalletPreview();resetTimer();closePicker()}
+
+function openFieldPicker(field){
+  const options=shuffle(OPTIONS[field]).map(v=>`<button class="picker-option" data-picker="field" data-field="${field}" data-value="${v}">${v}</button>`).join('');
+  openPicker(LABELS[field],`Choose the matching ${LABELS[field]} from the Dummy Invoice.`,options,'field',field)
 }
-function clearField(field){
-  const slot=document.querySelector(`.answer-slot[data-field="${field}"]`);if(!slot)return;
-  const old=slot.dataset.value;
-  if(old)document.querySelectorAll(`.chip[data-field="${field}"]`).forEach(c=>{if(c.dataset.value===old)c.classList.remove('used','selected')});
-  slot.textContent=`Tap here after selecting ${LABELS[field]}`;slot.dataset.value='';slot.classList.remove('filled','correct','wrong')
+function chooseFieldValue(field,value){const slot=document.querySelector(`.answer-slot[data-field="${field}"]`);if(!slot)return;slot.textContent=value;slot.dataset.value=value;slot.classList.add('filled');slot.classList.remove('wrong');closePicker()}
+function openPalletPicker(){
+  const options=shuffle(Object.keys(PALLETS)).map(key=>{const [name,size,hu]=PALLETS[key];return `<button class="picker-option pallet" data-picker="pallet" data-value="${key}"><strong>${name}</strong><span>${size}</span><span>${hu}</span></button>`}).join('');
+  openPicker('Choose the pallet','Pick the pallet that best fits the rack dimension.',options,'pallet')
 }
-function resetGame(){state.selectedChip=null;state.selectedPallet=null;clearMessages();renderFields();renderOptions();renderPallets();resetTimer()}
+function choosePallet(key){state.selectedPallet=key;renderPalletPreview();closePicker()}
 
 function checkAsn(){
   clearMessages();let wrong=0;
   document.querySelectorAll('.answer-slot').forEach(slot=>{const field=slot.dataset.field;if(norm(slot.dataset.value)===norm(CORRECT[field])){slot.classList.add('correct');slot.classList.remove('wrong')}else{wrong++;clearField(field);slot.classList.add('wrong')}});
-  if(wrong){message('asnMessage',`Almost there! ${wrong} field(s) do not match the Dummy Invoice. Check those fields and try again.`);return}
+  if(wrong){message('asnMessage',`Almost there! ${wrong} field(s) do not match the Dummy Invoice. Tap the field again and choose another answer.`);return}
   overlay('📦','Step 1 Complete','Great! Now choose the pallet that fits the rack.',()=>showPage('huPage'))
 }
 function checkHu(){
-  clearMessages();if(!state.selectedPallet){message('huMessage','Choose one pallet first.');return}
-  if(state.selectedPallet!=='6000.115.761'){message('huMessage','Not quite — this pallet is too tall for the rack. Try another one.');return}
+  clearMessages();
+  if(!state.selectedPallet){message('huMessage','Tap "Choose Pallet Option" first.');return}
+  if(state.selectedPallet!=='6000.115.761'){message('huMessage','Not quite — this pallet is too tall for the rack. Open the options again and try another one.');return}
   stopTimer();overlay('✅','ASN Created','Receiving can continue. Nice work!',()=>showPage('donePage'))
 }
 
-$('themeToggle').onclick=toggleTheme;$('storyBack').onclick=prevScene;$('storyNext').onclick=nextScene;
-$('startMission').onclick=()=>{resetGame();showPage('asnPage');startTimer()};$('checkAsn').onclick=checkAsn;$('checkHu').onclick=checkHu;
-$('restartAsn').onclick=$('restartHu').onclick=$('playAgain').onclick=()=>{resetGame();showPage('startPage');updateScene(0)};$('transitionContinue').onclick=continueOverlay;
-$('optionGroups').addEventListener('click',e=>{const chip=e.target.closest('.chip');if(!chip||chip.classList.contains('used'))return;document.querySelectorAll('.chip').forEach(c=>c.classList.remove('selected'));chip.classList.add('selected');state.selectedChip=chip});
-document.addEventListener('click',e=>{const slot=e.target.closest('.answer-slot');if(slot&&state.selectedChip){const field=slot.dataset.field;if(state.selectedChip.dataset.field!==field){message('asnMessage',`This value belongs to ${LABELS[state.selectedChip.dataset.field]}, not ${LABELS[field]}.`);return}clearField(field);slot.textContent=state.selectedChip.dataset.value;slot.dataset.value=state.selectedChip.dataset.value;slot.classList.add('filled');state.selectedChip.classList.add('used');state.selectedChip.classList.remove('selected');state.selectedChip=null}const clr=e.target.closest('.clear-btn');if(clr)clearField(clr.dataset.clear)});
-try{setTheme(localStorage.getItem('asnTheme')||'dark')}catch{setTheme('dark')}resetGame();updateScene(0);showPage('startPage');
+$('themeToggle').onclick=toggleTheme;
+$('storyBack').onclick=prevScene;
+$('storyNext').onclick=nextScene;
+$('startMission').onclick=()=>{resetGame();showPage('asnPage');startTimer()};
+$('checkAsn').onclick=checkAsn;
+$('checkHu').onclick=checkHu;
+$('openPalletPicker').onclick=openPalletPicker;
+$('restartAsn').onclick=$('restartHu').onclick=$('playAgain').onclick=()=>{resetGame();showPage('startPage');updateScene(0)};
+$('transitionContinue').onclick=continueOverlay;
+$('pickerClose').onclick=closePicker;
+$('pickerOverlay').addEventListener('click',e=>{if(e.target===e.currentTarget)closePicker()});
+
+document.addEventListener('click',e=>{
+  const slot=e.target.closest('.answer-slot');
+  if(slot){openFieldPicker(slot.dataset.field);return}
+  const clr=e.target.closest('.clear-btn');
+  if(clr){clearField(clr.dataset.clear);return}
+  const pick=e.target.closest('.picker-option');
+  if(pick){if(pick.dataset.picker==='field')chooseFieldValue(pick.dataset.field,pick.dataset.value);else if(pick.dataset.picker==='pallet')choosePallet(pick.dataset.value)}
+});
+
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closePicker()});
+
+try{setTheme(localStorage.getItem('asnTheme')||'dark')}catch{setTheme('dark')}
+resetGame();updateScene(0);showPage('startPage');
