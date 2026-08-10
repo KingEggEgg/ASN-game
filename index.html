@@ -1,9 +1,160 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>ASN Rush Comic</title><style>
-:root{--bg:#091423;--panel:#10233a;--card:#193450;--line:#395a78;--text:#f7fbff;--muted:#bfd3e6;--accent:#ff9f1c;--accent2:#ffd78e;--ok:#40e58c;--okbg:#123b2b;--bad:#ff5b55;--badbg:#4c1d24;--ink:#0b1b2e;--paper:#f8fbff;--shadow:0 12px 28px rgba(0,0,0,.18)}
-body.light{--bg:#eef4f8;--panel:#fff;--card:#fff;--line:#bfd0dd;--text:#132437;--muted:#5b6f82;--ok:#159a5b;--okbg:#eaf8f0;--bad:#d93636;--badbg:#fdecec;--ink:#11283e;--paper:#fff;--shadow:0 12px 24px rgba(31,61,85,.08)}*{box-sizing:border-box}html,body{margin:0;min-height:100%}body{font-family:system-ui,-apple-system,Segoe UI,sans-serif;background:linear-gradient(180deg,var(--bg),#132944);color:var(--text)}body.light{background:linear-gradient(180deg,#f4f8fb,#e8f1f7)}button{font:inherit}main{min-height:100vh;padding:12px;display:flex;justify-content:center}.shell{width:min(960px,100%);background:var(--panel);border:1px solid var(--line);border-radius:24px;padding:14px;position:relative;box-shadow:var(--shadow)}.top{display:flex;justify-content:space-between;gap:10px;align-items:center;padding:12px 14px;border:1px solid var(--line);background:rgba(255,255,255,.04);border-radius:18px;margin-bottom:14px}.top strong{display:block;font-size:15px}.top span{display:block;color:var(--muted);font-size:12px}.toggle{min-height:40px;padding:0 14px;border:1px solid var(--line);background:var(--card);color:var(--text);border-radius:999px;font-weight:900;cursor:pointer}.badge{display:inline-flex;min-height:30px;align-items:center;padding:0 12px;border-radius:999px;border:1px solid #317697;background:#12314f;color:#dff7ff;font-size:11px;font-weight:900;letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px}body.light .badge{background:#eaf4fb;color:#24526d}.page{display:none}.page.active{display:block}h1,h2,p{margin:0}h1{font-size:clamp(42px,11vw,70px);line-height:.98;letter-spacing:-.04em}h2{font-size:clamp(28px,8vw,42px);line-height:1.02;letter-spacing:-.03em}p{line-height:1.45;color:var(--muted)}.card,.fields,.options,.rack,.answers{border:1px solid var(--line);background:var(--card);border-radius:22px;box-shadow:var(--shadow)}.card{padding:16px;display:grid;gap:14px}.hero{display:grid;gap:6px}.comic{position:relative;min-height:360px;border-radius:20px;border:3px solid var(--ink);background:var(--paper);overflow:hidden}.scene{display:none;position:absolute;inset:0;padding:16px;color:var(--ink)}.scene.active{display:block}.narr{display:inline-block;max-width:min(82%,520px);padding:10px 12px;border:3px solid var(--ink);border-radius:14px;background:#ffe8b5;box-shadow:4px 4px 0 var(--ink);font-weight:900;line-height:1.35;position:relative;z-index:2}.art{position:absolute;inset:64px 16px 16px 16px;border-radius:18px;background:linear-gradient(180deg,#d9efff 0%,#b7d6ef 30%,#8fb4d2 100%);border:3px solid var(--ink);overflow:hidden}.ground{position:absolute;left:0;right:0;bottom:0;height:32%;background:linear-gradient(180deg,#35648f,#214768);border-top:3px solid var(--ink)}.road{position:absolute;left:6%;right:6%;bottom:10%;height:8px;background:repeating-linear-gradient(90deg,#ffaf26 0 34px,transparent 34px 68px);border-radius:999px}.dock{position:absolute;right:6%;bottom:18%;width:24%;max-width:120px;min-width:84px;height:46%;border:4px solid var(--ink);border-bottom-width:0;border-radius:16px 16px 0 0;background:rgba(255,255,255,.18)}.label{position:absolute;right:4%;top:14%;padding:4px 8px;border-radius:10px;background:#fff;border:3px solid var(--ink);font-size:12px;font-weight:900;z-index:2}.bubble{position:absolute;max-width:42%;padding:10px 12px;border:3px solid var(--ink);border-radius:18px;background:#fff;box-shadow:4px 4px 0 var(--ink);font-weight:900;line-height:1.25;z-index:2}.bubble:after{content:"";position:absolute;width:18px;height:18px;background:#fff;border-right:3px solid var(--ink);border-bottom:3px solid var(--ink);transform:rotate(35deg);bottom:-10px;left:22px}.sticker{position:absolute;top:18px;right:18px;padding:8px 12px;border-radius:999px;border:3px solid var(--ink);background:#ff6d63;color:#fff;font-weight:900;transform:rotate(-6deg);box-shadow:4px 4px 0 var(--ink);z-index:2}.burst{position:absolute;display:grid;place-items:center;width:110px;aspect-ratio:1;background:#ffe36a;clip-path:polygon(50% 0%,61% 22%,85% 8%,78% 32%,100% 35%,79% 48%,96% 67%,72% 66%,76% 91%,55% 75%,44% 100%,34% 77%,11% 91%,18% 66%,0% 63%,22% 49%,4% 33%,26% 31%,15% 8%,39% 22%);border:3px solid var(--ink);box-shadow:4px 4px 0 var(--ink);text-align:center;font-weight:900;line-height:1.05;z-index:2}.truck{position:absolute;left:7%;bottom:19%;width:42%;height:30%;min-width:170px;max-width:260px}.truck .box{position:absolute;right:0;bottom:12%;width:58%;height:44%;border-radius:16px;border:4px solid var(--ink);background:#f2f7fd}.truck .cab{position:absolute;left:8%;bottom:12%;width:26%;height:34%;border-radius:14px 16px 10px 12px;border:4px solid var(--ink);background:#ffb233}.wheel{position:absolute;bottom:0;width:16%;aspect-ratio:1;border-radius:50%;border:4px solid var(--ink);background:#283d52}.w1{left:18%}.w2{right:14%}.worker{position:absolute;bottom:20%;width:14%;max-width:86px;aspect-ratio:.62}.worker:before{content:"";position:absolute;left:34%;top:0;width:30%;aspect-ratio:1;border-radius:50%;border:4px solid var(--ink);background:#ffdfbb}.worker:after{content:"";position:absolute;left:20%;top:26%;width:60%;height:42%;border-radius:18px;border:4px solid var(--ink);background:#46e092}.legs{position:absolute;left:26%;bottom:0;width:48%;height:24%;border-left:4px solid var(--ink);border-right:4px solid var(--ink);border-bottom:4px solid var(--ink);border-radius:0 0 10px 10px}.left{left:12%}.right{left:34%}.sheet{position:absolute;left:8%;top:22%;width:32%;min-width:150px;max-width:220px;padding:14px 12px;border:4px solid var(--ink);border-radius:18px;background:#fff;transform:rotate(-6deg);box-shadow:6px 6px 0 var(--ink)}.sheet strong{display:block;margin-bottom:10px;font-size:18px}.line{height:8px;border-radius:999px;background:#d4e7f6;margin:7px 0}.short{width:68%}.hilite{height:12px;border-radius:999px;background:#ffcf6d;margin-top:10px}.window{position:absolute;right:8%;top:22%;width:40%;min-width:170px;max-width:280px;border:4px solid var(--ink);border-radius:18px;background:#eff6fc;overflow:hidden;box-shadow:6px 6px 0 var(--ink)}.wtop{display:flex;gap:6px;align-items:center;padding:8px 10px;background:#d7e8f7;border-bottom:4px solid var(--ink)}.dot{width:10px;height:10px;border-radius:50%;background:#ff6d63;border:2px solid var(--ink)}.wbody{padding:10px}.bar{height:12px;border-radius:999px;background:#b6d5ea;margin:8px 0}.fill{background:#20c7ff}.flow{position:absolute;left:7%;right:7%;top:34%;display:grid;grid-template-columns:1fr auto 1fr auto 1fr;align-items:center;gap:8px}.fbox{min-height:86px;padding:12px 8px;border-radius:18px;border:4px solid var(--ink);background:rgba(255,255,255,.82);display:grid;place-items:center;text-align:center;font-weight:900;font-size:clamp(16px,4vw,24px);box-shadow:4px 4px 0 var(--ink)}.arrow{font-size:clamp(24px,6vw,36px);font-weight:900;color:#ff9f1c;text-shadow:2px 2px 0 var(--ink)}.storybar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}.storybar .step{color:var(--muted);font-weight:900;font-size:13px}.sbtns{display:flex;gap:10px}.sbtn{min-height:46px;padding:0 18px;border-radius:14px;border:1px solid var(--line);background:transparent;color:var(--text);font-weight:900;cursor:pointer}.sbtn:disabled{opacity:.45}.actions{display:grid;gap:10px;margin-top:14px}.btn{min-height:58px;border:0;border-radius:18px;cursor:pointer;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#06101d;font-weight:900;font-size:15px;letter-spacing:.08em;text-transform:uppercase}.btn.sec{background:#213d5a;color:var(--text);border:1px solid var(--line)}body.light .btn.sec{background:#edf4f8}.btn.ok{background:linear-gradient(135deg,var(--ok),#9dffca)}.strip{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 12px;margin-bottom:12px;border:1px solid #317697;border-radius:16px;background:#12314f}body.light .strip{background:#edf4f8}.timer{font-family:ui-monospace,monospace;font-size:20px;font-weight:900;color:var(--accent2);min-width:70px;text-align:right}.timer.hot{color:#ff7270}.title{display:grid;gap:6px;margin-bottom:12px}.note{padding:12px;border-radius:15px;margin-bottom:12px;border:1px solid #3a647f;background:#163450;font-weight:800;color:#e6f5ff}body.light .note{background:#edf4f8;color:var(--text)}.msg{display:none;padding:12px;border-radius:15px;margin-bottom:12px;font-weight:800;border:1px solid var(--bad);background:var(--badbg)}.msg.show{display:block}.grid{display:grid;gap:12px}.fields,.options,.rack,.answers{padding:14px}.head{font-weight:900;margin-bottom:10px}.field{display:grid;gap:7px}.fhead{display:flex;align-items:center;justify-content:space-between;gap:8px}.fhead span{color:var(--muted);font-size:12px;text-transform:uppercase;font-weight:900;letter-spacing:.08em}.clear{min-height:30px;padding:0 10px;border-radius:999px;border:1px solid #4a6e8f;background:#183752;color:var(--muted);font-size:12px;font-weight:800}body.light .clear{background:#edf4f8}.slot{width:100%;min-height:62px;text-align:center;border-radius:16px;border:2px dashed #477798;background:#102b47;color:#dbe9f7;font-family:ui-monospace,monospace;font-size:14px;font-weight:800;padding:10px;overflow-wrap:anywhere}body.light .slot{background:#f5f9fc;color:var(--text)}.slot.filled{border-style:solid;border-color:#20c7ff;background:#123a5a;color:#fff}.slot.good{border-color:var(--ok);background:var(--okbg);color:var(--text)}.slot.bad{border-color:var(--bad);background:var(--badbg);color:var(--text)}.group{display:grid;gap:8px}.gtitle{color:var(--muted);font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:.08em}.chips{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.chip{min-height:50px;border-radius:14px;border:1px solid #4a6e8f;background:#203f5d;color:#fff;font-family:ui-monospace,monospace;font-size:13px;font-weight:900;padding:8px;cursor:pointer;overflow-wrap:anywhere}body.light .chip{background:#edf4f8;color:var(--text)}.chip.sel{border-color:var(--accent);background:#5b3e15;color:#fff;outline:3px solid rgba(255,159,28,.22)}.chip.used{opacity:.35;pointer-events:none}.rackbox{position:relative;min-height:270px;display:grid;place-items:center;padding:18px 44px 40px}.rframe{width:min(250px,72vw);aspect-ratio:1.18;border:9px solid #dff7ff;border-radius:14px;position:relative}.rframe:before,.rframe:after{content:"";position:absolute;left:0;right:0;height:8px;background:#dff7ff}.rframe:before{top:33%}.rframe:after{top:67%}.v1,.v2{position:absolute;top:0;bottom:0;width:8px;background:#dff7ff}.v1{left:32%}.v2{right:32%}.dim{position:absolute;padding:6px 8px;border-radius:10px;background:var(--accent);color:#06101d;font-weight:900;font-size:12px;box-shadow:2px 2px 0 rgba(0,0,0,.18)}.h{left:0;top:50%;transform:translateY(-50%)}.w{right:0;top:50%;transform:translateY(-50%)}.l{left:50%;bottom:0;transform:translateX(-50%)}.choices{display:grid;gap:8px}.choice{min-height:72px;border-radius:16px;border:1px solid #4a6e8f;background:#203f5d;color:#fff;font-family:ui-monospace,monospace;font-weight:900;padding:10px;cursor:pointer;text-align:left;display:grid;gap:4px}body.light .choice{background:#edf4f8;color:var(--text)}.choice.sel{border-color:var(--accent);background:#5b3e15;color:#fff;outline:3px solid rgba(255,159,28,.22)}.choice small{color:var(--muted);font-family:inherit}.done{display:grid;gap:14px;place-items:center;text-align:center;padding:24px 0}.check{display:grid;place-items:center;width:86px;height:86px;border-radius:50%;background:var(--okbg);color:var(--ok);font-size:48px;font-weight:900}.time{font-family:ui-monospace,monospace;font-size:40px;font-weight:900;color:var(--accent2)}.sum{width:min(520px,100%);display:grid;gap:8px}.row{padding:12px;border-radius:14px;background:var(--okbg);border:1px solid #2c8f5b;text-align:left;font-weight:800;color:var(--text)}.ov{position:absolute;inset:0;display:none;place-items:center;padding:24px;background:rgba(4,10,18,.72);backdrop-filter:blur(8px);z-index:10}.ov.show{display:grid}.ovcard{width:min(420px,100%);padding:18px;border-radius:22px;border:3px solid var(--ink);background:var(--paper);color:var(--ink);text-align:center;box-shadow:6px 6px 0 var(--ink)}.ovcard .icon{font-size:42px;margin-bottom:8px}.ovcard h3{font-size:24px;margin:0 0 8px}.ovcard p{color:#24405b}.ovcard button{margin-top:14px;min-height:48px;padding:0 16px;border:0;border-radius:14px;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#06101d;font-weight:900;cursor:pointer}@media(min-width:820px){.grid{grid-template-columns:.9fr 1.1fr}.chips{grid-template-columns:repeat(3,minmax(0,1fr))}.hugrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.choices{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:520px){.comic{min-height:320px}.art{inset:60px 12px 12px}.narr{max-width:92%;font-size:13px}.bubble{max-width:52%;font-size:12px;padding:8px 10px}.sheet{width:38%;min-width:132px}.window{width:44%;min-width:148px}.flow{left:5%;right:5%;top:32%;gap:4px}.fbox{min-height:74px;font-size:15px;padding:10px 6px}.arrow{font-size:22px}.burst{width:90px;font-size:12px}}
-</style></head><body><main><section class="shell"><div class="ov" id="ov"><div class="ovcard"><div class="icon" id="ovI">📦</div><h3 id="ovT">Mission Update</h3><p id="ovP">Loading...</p><button id="ovB">Continue</button></div></div><header class="top"><div><strong>PGP1 Receiving & Warehouse</strong><span>Commercial Day • ASN Rush</span></div><button class="toggle" id="theme"><span id="themeI">☀️</span> <span id="themeL">Light</span></button></header><section class="page active" id="start"><div class="badge">Commercial Day Mini Game</div><div class="card"><div class="hero"><h1>ASN Rush</h1><p>Comic-style mission intro.</p></div><div class="comic"><div class="scene active"><div class="narr">Panel 1 — An inbound truck arrives at the Receiving dock.</div><div class="art"><div class="dock"></div><div class="label">RECEIVING</div><div class="truck"><div class="cab"></div><div class="box"></div><div class="wheel w1"></div><div class="wheel w2"></div></div><div class="bubble" style="left:8%;top:16%">Incoming shipment is here!</div><div class="ground"></div><div class="road"></div></div></div><div class="scene"><div class="narr">Panel 2 — The team is ready, but they cannot continue without shipment data.</div><div class="sticker">Waiting!</div><div class="art"><div class="worker left"><div class="legs"></div></div><div class="worker right"><div class="legs"></div></div><div class="bubble" style="left:9%;top:14%">Truck is here…</div><div class="bubble" style="left:46%;top:18%">But where is the ASN?</div><div class="dock"></div><div class="label">RECEIVING</div><div class="ground"></div><div class="road"></div></div></div><div class="scene"><div class="narr">Panel 3 — Use the printed Dummy Invoice at the booth to create the ASN.</div><div class="art"><div class="sheet"><strong>DUMMY INVOICE</strong><div class="line"></div><div class="line short"></div><div class="line"></div><div class="line short"></div><div class="hilite"></div></div><div class="window"><div class="wtop"><div class="dot"></div><div class="dot" style="background:#ffc44d"></div><div class="dot" style="background:#40e58c"></div></div><div class="wbody"><div class="bar fill"></div><div class="bar"></div><div class="bar fill"></div><div class="bar"></div></div></div><div class="burst" style="right:10%;bottom:13%">Match the data!</div></div></div><div class="scene"><div class="narr">Panel 4 — Match the invoice, choose the correct pallet, and help Receiving move again.</div><div class="art"><div class="flow"><div class="fbox">Invoice</div><div class="arrow">→</div><div class="fbox">ASN</div><div class="arrow">→</div><div class="fbox">Pallet<br>Check</div></div><div class="burst" style="left:7%;bottom:14%">Your mission!</div><div class="dock"></div><div class="label">RECEIVING</div><div class="ground"></div><div class="road"></div></div></div></div><div class="storybar"><div class="step" id="step">Panel 1 / 4</div><div class="sbtns"><button class="sbtn" id="prev" disabled>Back</button><button class="sbtn" id="next">Next</button></div></div></div><div class="actions"><button class="btn" id="startBtn">Start Mission</button></div></section><section class="page" id="asn"><div class="badge">Step 1 of 2</div><div class="strip"><strong>🚛 Shipment arrived • Target: 60 sec</strong><div class="timer" id="timer">00:00</div></div><div class="title"><h2>Match the Dummy Invoice</h2><p>Look at the printed Dummy Invoice. Tap the matching value, then tap the ASN field.</p></div><div class="note">Tip: just look for the same information on the printed Dummy Invoice — no logistics experience needed.</div><div class="msg" id="msg1"></div><div class="grid"><div class="fields"><div class="head">ASN Fields</div><div id="fieldWrap"></div></div><div class="options"><div class="head">Possible Answers</div><div id="groups"></div></div></div><div class="actions"><button class="btn" id="check1">Check ASN Entry</button><button class="btn sec" id="restart1">Restart</button></div></section><section class="page" id="hu"><div class="badge">Step 2 of 2</div><div class="strip"><strong>📦 Final step • Choose the pallet</strong><div class="timer" id="timer2">00:00</div></div><div class="title"><h2>Choose the Pallet That Fits</h2><p>Compare the pallet size with the rack. Choose the best fit.</p></div><div class="msg" id="msg2"></div><div class="hugrid"><div class="rack"><div class="head">Rack Dimension</div><div class="rackbox"><div class="rframe"><div class="v1"></div><div class="v2"></div></div><div class="dim h">H 500</div><div class="dim w">W 800</div><div class="dim l">L 1200</div></div><p>Dimension shown: <strong>L 1200 mm × W 800 mm × H 500 mm</strong></p></div><div class="answers"><div class="head">Which pallet fits?</div><div class="note" style="margin:0 0 12px">Choose the pallet that matches: <strong>1200 × 800 × 500 mm</strong>.</div><div class="choices" id="choices"></div></div></div><div class="actions"><button class="btn" id="check2">Check Pallet</button><button class="btn sec" id="restart2">Restart</button></div></section><section class="page" id="done"><div class="done"><div class="check">✓</div><div class="badge">Mission Complete</div><h2>ASN Created</h2><p>Great job — you helped Receiving continue the inbound process.</p><div><p style="margin-bottom:8px">Your Time</p><div class="time" id="final">00:00</div></div><div class="sum"><div class="row">✅ Correct invoice information matched from the Dummy Invoice</div><div class="row">✅ Correct pallet selected for the rack</div><div class="row">✅ Packaging Material: <strong>6000.115.761</strong> • HU Type: <strong>E105</strong></div></div><p><strong>Challenge a colleague to beat your time!</strong></p><button class="btn ok" id="again">Play Again</button></div></section></section></main><script>
-const D={invoice:'INV-001',awb:'1903099900',part:'1267370881',description:'Plastic Moulding; 538X354X28',qty:'200'},L={invoice:'Invoice No',awb:'AWB',part:'Part Number',description:'Description',qty:'Qty'},O={invoice:['INV-001','INV-002','INV-003'],awb:['1903099900','1903099901','1903099902'],part:['1267370881','1267370882','1267370883'],description:['Plastic Moulding; 538X354X28','Thermal Conduction Compound','Lc Display; TFT 7inch'],qty:['200','240','120']},P={'6000.115.761':['📦 Pallet A','1200 × 800 × 500 mm','HU E105'],'6000.115.762':['📦 Pallet B','1200 × 800 × 1000 mm','HU E112'],'6000.115.763':['📦 Pallet C','1200 × 800 × 1500 mm','HU E119']},F=['invoice','awb','part','description','qty'];
-const S={story:0,chip:null,mat:null,hu:null,start:null,secs:0,t:null,cb:null},$=x=>document.getElementById(x),pages={start:$('start'),asn:$('asn'),hu:$('hu'),done:$('done')},scenes=[...document.querySelectorAll('.scene')];
-function sh(a){a=[...a];for(let i=a.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}function fmt(s){return`${String(Math.floor(s/60)).padStart(2,'0')}:${String(s%60).padStart(2,'0')}`}function norm(v){return String(v||'').trim().replace(/\s+/g,' ').toUpperCase()}function show(k){Object.values(pages).forEach(p=>p.classList.remove('active'));pages[k].classList.add('active');scrollTo(0,0)}function tick(){let t=fmt(S.secs);['timer','timer2'].forEach(id=>{let e=$(id);e.textContent=t;e.classList.toggle('hot',S.secs>=50)})}function startT(){clearInterval(S.t);S.start=Date.now();S.secs=0;tick();S.t=setInterval(()=>{S.secs=Math.floor((Date.now()-S.start)/1000);tick()},250)}function stopT(){if(S.start)S.secs=Math.floor((Date.now()-S.start)/1000);clearInterval(S.t);tick();$('final').textContent=fmt(S.secs)}function resetT(){clearInterval(S.t);S.t=null;S.start=null;S.secs=0;tick();$('final').textContent='00:00'}function msg(id,t){let e=$(id);e.textContent=t;e.classList.add('show')}function clearMsg(){['msg1','msg2'].forEach(id=>{let e=$(id);e.textContent='';e.classList.remove('show')})}function ov(i,t,p,cb){S.cb=cb;$('ovI').textContent=i;$('ovT').textContent=t;$('ovP').textContent=p;$('ov').classList.add('show')}function nextOv(){$('ov').classList.remove('show');let cb=S.cb;S.cb=null;if(cb)cb()}function setTheme(m){let light=m==='light';document.body.classList.toggle('light',light);$('themeI').textContent=light?'🌙':'☀️';$('themeL').textContent=light?'Dark':'Light';try{localStorage.setItem('asnTheme',light?'light':'dark')}catch(e){}}function updStory(i){S.story=i;scenes.forEach((s,n)=>s.classList.toggle('active',n===i));$('step').textContent=`Panel ${i+1} / ${scenes.length}`;$('prev').disabled=i===0;$('next').textContent=i===scenes.length-1?'Replay Story':'Next'}function renderFields(){let w=$('fieldWrap');w.innerHTML='';F.forEach(f=>{let s=document.createElement('section');s.className='field';s.innerHTML=`<div class="fhead"><span>${L[f]}</span><button class="clear" data-clear="${f}">Clear</button></div><button class="slot" data-field="${f}">Tap here after selecting ${L[f]}</button>`;w.appendChild(s)})}function renderOpts(){let g=$('groups');g.innerHTML='';F.forEach(f=>{let s=document.createElement('section');s.className='group';s.innerHTML=`<div class="gtitle">${L[f]}</div>`;let c=document.createElement('div');c.className='chips';sh(O[f]).forEach(v=>{let b=document.createElement('button');b.className='chip';b.type='button';b.dataset.field=f;b.dataset.value=v;b.textContent=v;c.appendChild(b)});s.appendChild(c);g.appendChild(s)})}function renderChoices(){let c=$('choices');c.innerHTML='';sh(Object.keys(P)).forEach(k=>{let b=document.createElement('button');b.className='choice';b.type='button';b.dataset.value=k;let [n,sz,hu]=P[k];b.innerHTML=`<strong>${n}</strong><small>${sz}</small><small>${hu}</small>`;b.onclick=()=>{c.querySelectorAll('.choice').forEach(x=>x.classList.remove('sel'));b.classList.add('sel');S.mat=k;S.hu=k==='6000.115.761'?'E105':k==='6000.115.762'?'E112':'E119'};c.appendChild(b)})}function clearField(f){let s=document.querySelector(`.slot[data-field="${f}"]`),ov=s.dataset.value;if(ov)document.querySelectorAll(`.chip[data-field="${f}"]`).forEach(c=>{if(c.dataset.value===ov)c.classList.remove('used','sel')});s.textContent=`Tap here after selecting ${L[f]}`;s.dataset.value='';s.classList.remove('filled','good','bad')}function reset(){S.chip=null;S.mat=null;S.hu=null;renderFields();renderOpts();renderChoices();clearMsg();resetT()}function check1(){clearMsg();let bad=0;document.querySelectorAll('.slot').forEach(s=>{let f=s.dataset.field;if(norm(s.dataset.value)===norm(D[f])){s.classList.add('good');s.classList.remove('bad')}else{bad++;clearField(f);s.classList.add('bad')}});if(bad)return msg('msg1',`Almost there! ${bad} field(s) do not match the Dummy Invoice. Check those fields and try again.`);ov('📦','Step 1 Complete','Great! Now choose the pallet that fits the rack.',()=>show('hu'))}function check2(){clearMsg();if(!S.mat||!S.hu)return msg('msg2','Choose one pallet first.');if(norm(S.mat)!=='6000.115.761'||norm(S.hu)!=='E105')return msg('msg2','Not quite — this pallet is too tall for the rack. Try another one.');stopT();ov('✅','ASN Created','Receiving can continue. Nice work!',()=>show('done'))}
-$('theme').onclick=()=>setTheme(document.body.classList.contains('light')?'dark':'light');$('prev').onclick=()=>S.story>0&&updStory(S.story-1);$('next').onclick=()=>updStory(S.story>=scenes.length-1?0:S.story+1);$('startBtn').onclick=()=>{reset();show('asn');startT()};$('check1').onclick=check1;$('check2').onclick=check2;$('restart1').onclick=$('restart2').onclick=$('again').onclick=()=>{reset();show('start')};$('ovB').onclick=nextOv;$('groups').onclick=e=>{let c=e.target.closest('.chip');if(!c||c.classList.contains('used'))return;document.querySelectorAll('.chip').forEach(x=>x.classList.remove('sel'));c.classList.add('sel');S.chip=c};document.addEventListener('click',e=>{let s=e.target.closest('.slot');if(s&&S.chip){let f=s.dataset.field;if(S.chip.dataset.field!==f)return msg('msg1',`This value belongs to ${L[S.chip.dataset.field]}, not ${L[f]}.`);clearField(f);s.textContent=S.chip.dataset.value;s.dataset.value=S.chip.dataset.value;s.classList.add('filled');S.chip.classList.add('used');S.chip.classList.remove('sel');S.chip=null}let clr=e.target.closest('.clear');if(clr)clearField(clr.dataset.clear)});try{setTheme(localStorage.getItem('asnTheme')||'dark')}catch(e){setTheme('dark')}reset();updStory(0);show('start');
-</script></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <title>ASN Rush</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<main class="app">
+  <section class="shell">
+    <div class="overlay" id="overlay" aria-hidden="true">
+      <div class="transition-card">
+        <div class="transition-icon" id="transitionIcon">📦</div>
+        <h3 id="transitionTitle">Mission Update</h3>
+        <p id="transitionText">Ready?</p>
+        <button class="primary small" id="transitionContinue">Continue</button>
+      </div>
+    </div>
+
+    <header class="topbar">
+      <div>
+        <strong>PGP1 Receiving & Warehouse</strong>
+        <span>Commercial Day • ASN Rush</span>
+      </div>
+      <button class="theme-toggle" id="themeToggle"><span id="themeIcon">☀️</span><span id="themeLabel">Light</span></button>
+    </header>
+
+    <section class="page active" id="startPage">
+      <div class="badge">Commercial Day Mini Game</div>
+      <section class="story-card">
+        <div class="story-heading">
+          <h1>ASN Rush</h1>
+          <p>A short cartoon story before the mission starts.</p>
+        </div>
+
+        <div class="story-scene-wrap">
+          <div class="story-caption" id="storyCaption">
+            <strong>Scene 1</strong>
+            <span>A truck arrives at Receiving.</span>
+          </div>
+
+          <div class="cartoon-frame">
+            <div class="scene active" data-scene="0">
+              <div class="sky"></div>
+              <div class="warehouse-building"><span>RECEIVING</span></div>
+              <div class="road"></div>
+              <div class="truck cartoon-truck">
+                <div class="truck-box"></div><div class="truck-cab"></div>
+                <div class="wheel wheel-a"></div><div class="wheel wheel-b"></div>
+              </div>
+              <div class="speech speech-one">Incoming shipment is here!</div>
+              <div class="motion-lines"></div>
+            </div>
+
+            <div class="scene" data-scene="1">
+              <div class="sky"></div>
+              <div class="warehouse-building"><span>RECEIVING</span></div>
+              <div class="road"></div>
+              <div class="worker worker-a"><div class="head"></div><div class="body"></div><div class="legs"></div></div>
+              <div class="worker worker-b"><div class="head"></div><div class="body"></div><div class="legs"></div></div>
+              <div class="speech speech-left">Truck is here...</div>
+              <div class="speech speech-right">But where is the ASN?</div>
+              <div class="alert-pop">WAITING!</div>
+            </div>
+
+            <div class="scene" data-scene="2">
+              <div class="desk"></div>
+              <div class="invoice-paper">
+                <b>DUMMY INVOICE</b>
+                <i></i><i></i><i class="short"></i><i></i><i class="highlight"></i>
+              </div>
+              <div class="system-screen">
+                <div class="screen-bar"></div>
+                <div class="screen-row r1"></div>
+                <div class="screen-row r2"></div>
+                <div class="screen-row r3"></div>
+                <div class="screen-row r4"></div>
+              </div>
+              <div class="data-chip chip1">INV-001</div>
+              <div class="data-chip chip2">1903099900</div>
+              <div class="data-chip chip3">200</div>
+              <div class="comic-burst">MATCH!</div>
+            </div>
+
+            <div class="scene" data-scene="3">
+              <div class="final-flow">
+                <div class="flow-step s1">📄<span>Invoice</span></div>
+                <div class="flow-arrow a1">➜</div>
+                <div class="flow-step s2">💻<span>ASN</span></div>
+                <div class="flow-arrow a2">➜</div>
+                <div class="flow-step s3">📦<span>Pallet Check</span></div>
+              </div>
+              <div class="forklift">🏗️</div>
+              <div class="success-burst">GO!</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="story-controls">
+          <div id="storyStep">Scene 1 / 4</div>
+          <div class="story-buttons">
+            <button class="secondary small" id="storyBack" disabled>Back</button>
+            <button class="secondary small" id="storyNext">Next</button>
+          </div>
+        </div>
+      </section>
+      <button class="primary full" id="startMission">Start Mission</button>
+    </section>
+
+    <section class="page" id="asnPage">
+      <div class="badge">Step 1 of 2</div>
+      <div class="mission-strip"><strong>🚛 Shipment arrived • Target: 60 sec</strong><span class="timer" id="timer1">00:00</span></div>
+      <div class="section-title"><h2>Match the Dummy Invoice</h2><p>Look at the printed Dummy Invoice. Tap the matching value, then tap the ASN field.</p></div>
+      <div class="hint">Tip: you only need to match the same information. No logistics experience needed.</div>
+      <div class="message" id="asnMessage"></div>
+      <div class="game-grid">
+        <section class="panel"><h3>ASN Fields</h3><div id="fieldList"></div></section>
+        <section class="panel"><h3>Possible Answers</h3><div id="optionGroups"></div></section>
+      </div>
+      <div class="actions"><button class="primary" id="checkAsn">Check ASN Entry</button><button class="secondary" id="restartAsn">Restart</button></div>
+    </section>
+
+    <section class="page" id="huPage">
+      <div class="badge">Step 2 of 2</div>
+      <div class="mission-strip"><strong>📦 Final step • Choose the pallet</strong><span class="timer" id="timer2">00:00</span></div>
+      <div class="section-title"><h2>Choose the Pallet That Fits</h2><p>Compare the pallet size with the rack. Choose the best fit.</p></div>
+      <div class="message" id="huMessage"></div>
+      <div class="game-grid">
+        <section class="panel">
+          <h3>Rack Dimension</h3>
+          <div class="rack-visual"><div class="rack-frame"><i></i><b></b></div><span class="dh">H 500</span><span class="dw">W 800</span><span class="dl">L 1200</span></div>
+          <p>Dimension: <strong>1200 × 800 × 500 mm</strong></p>
+        </section>
+        <section class="panel"><h3>Which pallet fits?</h3><div class="hint compact">Choose the pallet that matches <strong>1200 × 800 × 500 mm</strong>.</div><div id="palletChoices" class="pallet-grid"></div></section>
+      </div>
+      <div class="actions"><button class="primary" id="checkHu">Check Pallet</button><button class="secondary" id="restartHu">Restart</button></div>
+    </section>
+
+    <section class="page" id="donePage">
+      <div class="done">
+        <div class="done-check">✓</div>
+        <div class="badge">Mission Complete</div>
+        <h2>ASN Created</h2>
+        <p>Great job — you helped Receiving continue the inbound process.</p>
+        <div><p>Your Time</p><div class="final-time" id="finalTime">00:00</div></div>
+        <div class="summary">
+          <div>✅ Correct invoice information matched</div>
+          <div>✅ Correct pallet selected</div>
+          <div>✅ Packaging Material <strong>6000.115.761</strong> • HU Type <strong>E105</strong></div>
+        </div>
+        <p><strong>Challenge a colleague to beat your time!</strong></p>
+        <button class="primary" id="playAgain">Play Again</button>
+      </div>
+    </section>
+  </section>
+</main>
+<script src="app.js"></script>
+</body>
+</html>
