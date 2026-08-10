@@ -1,0 +1,27 @@
+/* Mobile rack alignment fix */
+.rack-visual{
+  display:grid;
+  grid-template-columns:auto minmax(0,1fr) auto;
+  grid-template-rows:1fr auto;
+  align-items:center;
+  justify-items:center;
+  gap:12px 10px;
+  min-height:0;
+  padding:18px 0 8px;
+}
+.rack-frame{
+  grid-column:2;
+  grid-row:1;
+  width:min(240px,58vw);
+  max-width:100%;
+}
+.rack-visual .dh{grid-column:1;grid-row:1;position:static;transform:none;justify-self:end}
+.rack-visual .dw{grid-column:3;grid-row:1;position:static;transform:none;justify-self:start}
+.rack-visual .dl{grid-column:2;grid-row:2;position:static;transform:none;justify-self:center}
+@media(max-width:520px){
+  .rack-visual{grid-template-columns:68px minmax(0,1fr) 68px;gap:10px 6px;padding:14px 0 4px}
+  .rack-frame{width:min(230px,52vw);border-width:7px}
+  .rack-frame:before,.rack-frame:after{height:7px}
+  .rack-frame i,.rack-frame b{width:7px}
+  .rack-visual span{font-size:13px;min-width:64px;text-align:center;padding:7px 8px}
+}
