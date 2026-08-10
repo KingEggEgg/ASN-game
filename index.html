@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <title>ASN Rush</title>
   <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="fix.css?v=8">
+  <link rel="stylesheet" href="rack-fix.css?v=9">
 </head>
 <body>
 <main class="app">
@@ -20,14 +20,7 @@
     </div>
 
     <div class="picker-overlay" id="pickerOverlay" aria-hidden="true">
-      <div class="picker-sheet">
-        <div class="picker-head">
-          <div>
-            <strong id="pickerTitle">Choose an answer</strong>
-            <p id="pickerSubtitle">Tap one option below.</p>
-          </div>
-          <button class="secondary small ghost" id="pickerClose">Close</button>
-        </div>
+      <div class="picker-sheet" role="dialog" aria-modal="true">
         <div class="picker-choices" id="pickerChoices"></div>
       </div>
     </div>
