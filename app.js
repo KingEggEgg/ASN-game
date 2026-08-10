@@ -35,8 +35,8 @@ function clearMessages(){['asnMessage','huMessage'].forEach(id=>{$(id).textConte
 function overlay(icon,title,text,callback){state.pending=callback;$('transitionIcon').textContent=icon;$('transitionTitle').textContent=title;$('transitionText').textContent=text;$('overlay').classList.add('show');$('overlay').setAttribute('aria-hidden','false')}
 function continueOverlay(){$('overlay').classList.remove('show');$('overlay').setAttribute('aria-hidden','true');const cb=state.pending;state.pending=null;if(cb)cb()}
 
-function openPicker(title,subtitle,buttonsHtml,mode,field=null){state.pickerMode=mode;state.pickerField=field;$('pickerTitle').textContent=title;$('pickerSubtitle').textContent=subtitle;$('pickerChoices').innerHTML=buttonsHtml;$('pickerOverlay').classList.add('show');$('pickerOverlay').setAttribute('aria-hidden','false')}
-function closePicker(){$('pickerOverlay').classList.remove('show');$('pickerOverlay').setAttribute('aria-hidden','true');state.pickerMode=null;state.pickerField=null}
+function openPicker(buttonsHtml,mode,field=null){state.pickerMode=mode;state.pickerField=field;$('pickerChoices').innerHTML=buttonsHtml;$('pickerOverlay').classList.add('show');$('pickerOverlay').setAttribute('aria-hidden','false');document.body.classList.add('modal-open')}
+function closePicker(){$('pickerOverlay').classList.remove('show');$('pickerOverlay').setAttribute('aria-hidden','true');document.body.classList.remove('modal-open');state.pickerMode=null;state.pickerField=null}
 
 function renderFields(){
   const host=$('fieldList');host.innerHTML='';
@@ -57,12 +57,12 @@ function resetGame(){state.selectedPallet=null;clearMessages();renderFields();re
 
 function openFieldPicker(field){
   const options=shuffle(OPTIONS[field]).map(v=>`<button class="picker-option" data-picker="field" data-field="${field}" data-value="${v}">${v}</button>`).join('');
-  openPicker(LABELS[field],`Choose the matching ${LABELS[field]} from the Dummy Invoice.`,options,'field',field)
+  openPicker(options,'field',field)
 }
 function chooseFieldValue(field,value){const slot=document.querySelector(`.answer-slot[data-field="${field}"]`);if(!slot)return;slot.textContent=value;slot.dataset.value=value;slot.classList.add('filled');slot.classList.remove('wrong');closePicker()}
 function openPalletPicker(){
   const options=shuffle(Object.keys(PALLETS)).map(key=>{const [name,size,hu]=PALLETS[key];return `<button class="picker-option pallet" data-picker="pallet" data-value="${key}"><strong>${name}</strong><span>${size}</span><span>${hu}</span></button>`}).join('');
-  openPicker('Choose the pallet','Pick the pallet that best fits the rack dimension.',options,'pallet')
+  openPicker(options,'pallet')
 }
 function choosePallet(key){state.selectedPallet=key;renderPalletPreview();closePicker()}
 
@@ -88,7 +88,6 @@ $('checkHu').onclick=checkHu;
 $('openPalletPicker').onclick=openPalletPicker;
 $('restartAsn').onclick=$('restartHu').onclick=$('playAgain').onclick=()=>{resetGame();showPage('startPage');updateScene(0)};
 $('transitionContinue').onclick=continueOverlay;
-$('pickerClose').onclick=closePicker;
 $('pickerOverlay').addEventListener('click',e=>{if(e.target===e.currentTarget)closePicker()});
 
 document.addEventListener('click',e=>{
