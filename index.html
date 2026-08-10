@@ -18,6 +18,19 @@
       </div>
     </div>
 
+    <div class="picker-overlay" id="pickerOverlay" aria-hidden="true">
+      <div class="picker-sheet">
+        <div class="picker-head">
+          <div>
+            <strong id="pickerTitle">Choose an answer</strong>
+            <p id="pickerSubtitle">Tap one option below.</p>
+          </div>
+          <button class="secondary small ghost" id="pickerClose">Close</button>
+        </div>
+        <div class="picker-choices" id="pickerChoices"></div>
+      </div>
+    </div>
+
     <header class="topbar">
       <div>
         <strong>PGP1 Receiving & Warehouse</strong>
@@ -111,12 +124,11 @@
     <section class="page" id="asnPage">
       <div class="badge">Step 1 of 2</div>
       <div class="mission-strip"><strong>🚛 Shipment arrived • Target: 60 sec</strong><span class="timer" id="timer1">00:00</span></div>
-      <div class="section-title"><h2>Match the Dummy Invoice</h2><p>Look at the printed Dummy Invoice. Tap the matching value, then tap the ASN field.</p></div>
-      <div class="hint">Tip: you only need to match the same information. No logistics experience needed.</div>
+      <div class="section-title"><h2>Match the Dummy Invoice</h2><p>Look at the printed Dummy Invoice. Tap each ASN field, then choose the matching answer from the pop-up.</p></div>
+      <div class="hint">Tip: tap one ASN field at a time. The answer choices will pop up, so you do not need to scroll down.</div>
       <div class="message" id="asnMessage"></div>
-      <div class="game-grid">
+      <div class="game-grid single-grid">
         <section class="panel"><h3>ASN Fields</h3><div id="fieldList"></div></section>
-        <section class="panel"><h3>Possible Answers</h3><div id="optionGroups"></div></section>
       </div>
       <div class="actions"><button class="primary" id="checkAsn">Check ASN Entry</button><button class="secondary" id="restartAsn">Restart</button></div>
     </section>
@@ -124,7 +136,7 @@
     <section class="page" id="huPage">
       <div class="badge">Step 2 of 2</div>
       <div class="mission-strip"><strong>📦 Final step • Choose the pallet</strong><span class="timer" id="timer2">00:00</span></div>
-      <div class="section-title"><h2>Choose the Pallet That Fits</h2><p>Compare the pallet size with the rack. Choose the best fit.</p></div>
+      <div class="section-title"><h2>Choose the Pallet That Fits</h2><p>Compare the pallet size with the rack. Tap the button to open the pallet options.</p></div>
       <div class="message" id="huMessage"></div>
       <div class="game-grid">
         <section class="panel">
@@ -132,7 +144,12 @@
           <div class="rack-visual"><div class="rack-frame"><i></i><b></b></div><span class="dh">H 500</span><span class="dw">W 800</span><span class="dl">L 1200</span></div>
           <p>Dimension: <strong>1200 × 800 × 500 mm</strong></p>
         </section>
-        <section class="panel"><h3>Which pallet fits?</h3><div class="hint compact">Choose the pallet that matches <strong>1200 × 800 × 500 mm</strong>.</div><div id="palletChoices" class="pallet-grid"></div></section>
+        <section class="panel">
+          <h3>Pallet Selection</h3>
+          <div class="hint compact">Tap the button below to see the pallet options. This is easier on mobile.</div>
+          <div id="palletPreview" class="selection-preview">No pallet selected yet.</div>
+          <button class="primary full" id="openPalletPicker">Choose Pallet Option</button>
+        </section>
       </div>
       <div class="actions"><button class="primary" id="checkHu">Check Pallet</button><button class="secondary" id="restartHu">Restart</button></div>
     </section>
