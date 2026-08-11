@@ -10,7 +10,7 @@ const CAPTIONS=[
   ['Scene 4','Create the ASN, choose the pallet, and help Receiving move again.']
 ];
 const $=id=>document.getElementById(id);
-const state={scene:0,selectedPallet:null,start:null,secs:0,timer:null,pending:null,pickerField:null,pickerMode:null};
+const state={scene:0,selectedPallet:null,start:null,secs:0,timer:null,pending:null,pickerField:null,pickerMode:null,palletAnimationLocked:false};
 const scenes=[...document.querySelectorAll('.scene')];
 
 function shuffle(a){a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
@@ -35,8 +35,8 @@ function clearMessages(){['asnMessage','huMessage'].forEach(id=>{$(id).textConte
 function overlay(icon,title,text,callback){state.pending=callback;$('transitionIcon').textContent=icon;$('transitionTitle').textContent=title;$('transitionText').textContent=text;$('overlay').classList.add('show');$('overlay').setAttribute('aria-hidden','false')}
 function continueOverlay(){$('overlay').classList.remove('show');$('overlay').setAttribute('aria-hidden','true');const cb=state.pending;state.pending=null;if(cb)cb()}
 
-function openPicker(buttonsHtml,mode,field=null){state.pickerMode=mode;state.pickerField=field;$('pickerChoices').innerHTML=buttonsHtml;$('pickerOverlay').classList.add('show');$('pickerOverlay').setAttribute('aria-hidden','false');document.body.classList.add('modal-open')}
-function closePicker(){$('pickerOverlay').classList.remove('show');$('pickerOverlay').setAttribute('aria-hidden','true');document.body.classList.remove('modal-open');state.pickerMode=null;state.pickerField=null}
+function openPicker(buttonsHtml,mode,field=null){state.pickerMode=mode;state.pickerField=field;$('pickerChoices').innerHTML=buttonsHtml;$('pickerOverlay').classList.add('show');$('pickerOverlay').setAttribute('aria-hidden','false')}
+function closePicker(){$('pickerOverlay').classList.remove('show');$('pickerOverlay').setAttribute('aria-hidden','true');state.pickerMode=null;state.pickerField=null}
 
 function renderFields(){
   const host=$('fieldList');host.innerHTML='';
@@ -53,7 +53,7 @@ function renderPalletPreview(){
   box.innerHTML=`<strong>${name}</strong><span>${size}</span><span>${hu}</span>`;box.classList.add('filled')
 }
 function clearField(field){const slot=document.querySelector(`.answer-slot[data-field="${field}"]`);if(!slot)return;slot.textContent=`Tap to choose ${LABELS[field]}`;slot.dataset.value='';slot.classList.remove('filled','correct','wrong')}
-function resetGame(){state.selectedPallet=null;clearMessages();renderFields();renderPalletPreview();resetTimer();closePicker()}
+function resetGame(){state.selectedPallet=null;state.palletAnimationLocked=false;clearMessages();renderFields();renderPalletPreview();resetTimer();closePicker();setTimeout(resetFitTest,0);const b=$('openPalletPicker');if(b){b.textContent='Choose Pallet Option';b.disabled=false;b.classList.remove('testing-button')}}
 
 function openFieldPicker(field){
   const options=shuffle(OPTIONS[field]).map(v=>`<button class="picker-option" data-picker="field" data-field="${field}" data-value="${v}">${v}</button>`).join('');
@@ -61,10 +61,60 @@ function openFieldPicker(field){
 }
 function chooseFieldValue(field,value){const slot=document.querySelector(`.answer-slot[data-field="${field}"]`);if(!slot)return;slot.textContent=value;slot.dataset.value=value;slot.classList.add('filled');slot.classList.remove('wrong');closePicker()}
 function openPalletPicker(){
+  if(state.palletAnimationLocked)return;
   const options=shuffle(Object.keys(PALLETS)).map(key=>{const [name,size,hu]=PALLETS[key];return `<button class="picker-option pallet" data-picker="pallet" data-value="${key}"><strong>${name}</strong><span>${size}</span><span>${hu}</span></button>`}).join('');
   openPicker(options,'pallet')
 }
-function choosePallet(key){state.selectedPallet=key;renderPalletPreview();closePicker()}
+function resetFitTest(){
+  const fit=$('fitTest'), pallet=$('testPallet');
+  if(!fit||!pallet)return;
+  fit.classList.remove('fit-success','fit-fail','testing');
+  pallet.className='test-pallet idle';
+  $('testPalletName').textContent='Choose a pallet';
+  $('fitResult').textContent='';
+}
+function animatePalletFit(key){
+  const fit=$('fitTest'), pallet=$('testPallet'), result=$('fitResult');
+  const button=$('openPalletPicker');
+  const [name,size]=PALLETS[key];
+  resetFitTest();
+  const type=key==='6000.115.761'?'a':key==='6000.115.762'?'b':'c';
+  pallet.classList.add(`pallet-${type}`);
+  $('testPalletName').textContent=`${name.replace('📦 ','')} · ${size}`;
+  fit.classList.add('testing');
+  const fits=key==='6000.115.761';
+  pallet.classList.add(fits?'testing-fit':'testing-over');
+  setTimeout(()=>{
+    fit.classList.remove('testing');
+    pallet.classList.remove('testing-fit','testing-over');
+    if(fits){
+      pallet.classList.add('fitted');
+      fit.classList.add('fit-success');
+      result.textContent='✓ FITS THE RACK';
+      stopTimer();
+      if(button){button.textContent='Pallet Fits';button.disabled=true}
+      setTimeout(()=>overlay('✅','Pallet Fits!','Pallet A fits the rack. ASN creation is complete.',()=>showPage('donePage')),850);
+    }else{
+      pallet.classList.add('oversized');
+      fit.classList.add('fit-fail');
+      result.textContent='OVER SIZED · TOO TALL';
+      message('huMessage',`${name.replace('📦 ','')} is over sized. Its height is greater than the rack height of 500 mm. Choose another pallet.`);
+      state.palletAnimationLocked=false;
+      if(button){button.disabled=false;button.classList.remove('testing-button');button.textContent='Choose Another Pallet'}
+    }
+  },1500);
+}
+function choosePallet(key){
+  if(state.palletAnimationLocked)return;
+  state.palletAnimationLocked=true;
+  state.selectedPallet=key;
+  renderPalletPreview();
+  closePicker();
+  clearMessages();
+  const button=$('openPalletPicker');
+  if(button){button.disabled=true;button.classList.add('testing-button');button.textContent='Testing Pallet...'}
+  setTimeout(()=>animatePalletFit(key),180);
+}
 
 function checkAsn(){
   clearMessages();let wrong=0;
@@ -84,7 +134,6 @@ $('storyBack').onclick=prevScene;
 $('storyNext').onclick=nextScene;
 $('startMission').onclick=()=>{resetGame();showPage('asnPage');startTimer()};
 $('checkAsn').onclick=checkAsn;
-$('checkHu').onclick=checkHu;
 $('openPalletPicker').onclick=openPalletPicker;
 $('restartAsn').onclick=$('restartHu').onclick=$('playAgain').onclick=()=>{resetGame();showPage('startPage');updateScene(0)};
 $('transitionContinue').onclick=continueOverlay;
