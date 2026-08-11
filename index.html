@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <title>ASN Rush</title>
   <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="rack-fix.css?v=9">
 </head>
 <body>
 <main class="app">
@@ -130,22 +129,30 @@
     <section class="page" id="huPage">
       <div class="badge">Step 2 of 2</div>
       <div class="mission-strip"><strong>📦 Final step • Choose the pallet</strong><span class="timer" id="timer2">00:00</span></div>
-      <div class="section-title"><h2>Choose the Pallet That Fits</h2><p>Compare the pallet size with the rack. Tap the button to open the pallet options.</p></div>
+      <div class="section-title"><h2>Choose the Pallet That Fits</h2><p>Choose a pallet. The system will automatically test whether it can fit into the rack.</p></div>
       <div class="message" id="huMessage"></div>
       <div class="game-grid">
         <section class="panel">
           <h3>Rack Dimension</h3>
-          <div class="rack-visual"><div class="rack-frame"><i></i><b></b></div><span class="dh">H 500</span><span class="dw">W 800</span><span class="dl">L 1200</span></div>
+          <div class="rack-test-stage" id="rackTestStage">
+            <div class="rack-visual"><div class="rack-frame" id="rackFrame"><i></i><b></b></div><span class="dh">H 500</span><span class="dw">W 800</span><span class="dl">L 1200</span></div>
+            <div class="test-pallet" id="testPallet" aria-hidden="true">
+              <div class="pallet-box" id="testPalletBox"></div>
+              <div class="pallet-base"></div>
+              <div class="pallet-label" id="testPalletLabel"></div>
+            </div>
+            <div class="fit-result" id="fitResult" aria-live="polite"></div>
+          </div>
           <p>Dimension: <strong>1200 × 800 × 500 mm</strong></p>
         </section>
         <section class="panel">
           <h3>Pallet Selection</h3>
-          <div class="hint compact">Tap the button below to see the pallet options. This is easier on mobile.</div>
+          <div class="hint compact">Select a pallet. The animation will test it automatically.</div>
           <div id="palletPreview" class="selection-preview">No pallet selected yet.</div>
           <button class="primary full" id="openPalletPicker">Choose Pallet Option</button>
         </section>
       </div>
-      <div class="actions"><button class="primary" id="checkHu">Check Pallet</button><button class="secondary" id="restartHu">Restart</button></div>
+      <div class="actions"><button class="secondary" id="restartHu">Restart</button></div>
     </section>
 
     <section class="page" id="donePage">
