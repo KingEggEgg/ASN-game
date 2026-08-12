@@ -4,7 +4,10 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <title>ASN Rush</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=13">
+  <link rel="stylesheet" href="rack-fix.css?v=10">
+  <link rel="stylesheet" href="fit-animation.css?v=8">
+  <link rel="stylesheet" href="v13-3d.css?v=13">
 </head>
 <body>
 <main class="app">
@@ -17,164 +20,30 @@
         <button class="primary small" id="transitionContinue">Continue</button>
       </div>
     </div>
-
     <div class="picker-overlay" id="pickerOverlay" aria-hidden="true">
-      <div class="picker-sheet" role="dialog" aria-modal="true">
-        <div class="picker-choices" id="pickerChoices"></div>
-      </div>
+      <div class="picker-sheet" role="dialog" aria-modal="true"><div class="picker-choices" id="pickerChoices"></div></div>
     </div>
-
-    <header class="topbar">
-      <div>
-        <strong>PGP1 Receiving & Warehouse</strong>
-        <span>Commercial Day • ASN Rush</span>
-      </div>
-      <button class="theme-toggle" id="themeToggle"><span id="themeIcon">☀️</span><span id="themeLabel">Light</span></button>
-    </header>
-
+    <header class="topbar"><div><strong>PGP1 Receiving & Warehouse</strong><span>Commercial Day • ASN Rush</span></div><button class="theme-toggle" id="themeToggle"><span id="themeIcon">☀️</span><span id="themeLabel">Light</span></button></header>
     <section class="page active" id="startPage">
       <div class="badge">Commercial Day Mini Game</div>
-      <section class="story-card">
-        <div class="story-heading">
-          <h1>ASN Rush</h1>
-          <p>A short cartoon story before the mission starts.</p>
-        </div>
-
-        <div class="story-scene-wrap">
-          <div class="story-caption" id="storyCaption">
-            <strong>Scene 1</strong>
-            <span>A truck arrives at Receiving.</span>
-          </div>
-
+      <section class="story-card"><div class="story-heading"><h1>ASN Rush</h1><p>A short cartoon story before the mission starts.</p></div>
+        <div class="story-scene-wrap"><div class="story-caption" id="storyCaption"><strong>Scene 1</strong><span>A truck arrives at Receiving.</span></div>
           <div class="cartoon-frame">
-            <div class="scene active" data-scene="0">
-              <div class="sky"></div>
-              <div class="warehouse-building"><span>RECEIVING</span></div>
-              <div class="road"></div>
-              <div class="truck cartoon-truck">
-                <div class="truck-box"></div><div class="truck-cab"></div>
-                <div class="wheel wheel-a"></div><div class="wheel wheel-b"></div>
-              </div>
-              <div class="speech speech-one">Incoming shipment is here!</div>
-              <div class="motion-lines"></div>
-            </div>
-
-            <div class="scene" data-scene="1">
-              <div class="sky"></div>
-              <div class="warehouse-building"><span>RECEIVING</span></div>
-              <div class="road"></div>
-              <div class="worker worker-a"><div class="head"></div><div class="body"></div><div class="legs"></div></div>
-              <div class="worker worker-b"><div class="head"></div><div class="body"></div><div class="legs"></div></div>
-              <div class="speech speech-left">Truck is here...</div>
-              <div class="speech speech-right">But where is the ASN?</div>
-              <div class="alert-pop">WAITING!</div>
-            </div>
-
-            <div class="scene" data-scene="2">
-              <div class="desk"></div>
-              <div class="invoice-paper">
-                <b>DUMMY INVOICE</b>
-                <i></i><i></i><i class="short"></i><i></i><i class="highlight"></i>
-              </div>
-              <div class="system-screen">
-                <div class="screen-bar"></div>
-                <div class="screen-row r1"></div>
-                <div class="screen-row r2"></div>
-                <div class="screen-row r3"></div>
-                <div class="screen-row r4"></div>
-              </div>
-              <div class="data-chip chip1">INV-001</div>
-              <div class="data-chip chip2">1903099900</div>
-              <div class="data-chip chip3">200</div>
-              <div class="comic-burst">MATCH!</div>
-            </div>
-
-            <div class="scene" data-scene="3">
-              <div class="final-flow">
-                <div class="flow-step s1">📄<span>Invoice</span></div>
-                <div class="flow-arrow a1">➜</div>
-                <div class="flow-step s2">💻<span>ASN</span></div>
-                <div class="flow-arrow a2">➜</div>
-                <div class="flow-step s3">📦<span>Pallet Check</span></div>
-              </div>
-              <div class="forklift">🏗️</div>
-              <div class="success-burst">GO!</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="story-controls">
-          <div id="storyStep">Scene 1 / 4</div>
-          <div class="story-buttons">
-            <button class="secondary small" id="storyBack" disabled>Back</button>
-            <button class="secondary small" id="storyNext">Next</button>
-          </div>
-        </div>
-      </section>
-      <button class="primary full" id="startMission">Start Mission</button>
+            <div class="scene active" data-scene="0"><div class="sky"></div><div class="warehouse-building"><span>RECEIVING</span></div><div class="road"></div><div class="truck cartoon-truck"><div class="truck-box"></div><div class="truck-cab"></div><div class="wheel wheel-a"></div><div class="wheel wheel-b"></div></div><div class="speech speech-one">Incoming shipment is here!</div><div class="motion-lines"></div></div>
+            <div class="scene" data-scene="1"><div class="sky"></div><div class="warehouse-building"><span>RECEIVING</span></div><div class="road"></div><div class="worker worker-a"><div class="head"></div><div class="body"></div><div class="legs"></div></div><div class="worker worker-b"><div class="head"></div><div class="body"></div><div class="legs"></div></div><div class="speech speech-left">Truck is here...</div><div class="speech speech-right">But where is the ASN?</div><div class="alert-pop">WAITING!</div></div>
+            <div class="scene" data-scene="2"><div class="desk"></div><div class="invoice-paper"><b>DUMMY INVOICE</b><i></i><i></i><i class="short"></i><i></i><i class="highlight"></i></div><div class="system-screen"><div class="screen-bar"></div><div class="screen-row r1"></div><div class="screen-row r2"></div><div class="screen-row r3"></div><div class="screen-row r4"></div></div><div class="data-chip chip1">INV-001</div><div class="data-chip chip2">1903099900</div><div class="data-chip chip3">200</div><div class="comic-burst">MATCH!</div></div>
+            <div class="scene" data-scene="3"><div class="final-flow"><div class="flow-step s1">📄<span>Invoice</span></div><div class="flow-arrow a1">➜</div><div class="flow-step s2">💻<span>ASN</span></div><div class="flow-arrow a2">➜</div><div class="flow-step s3">📦<span>Pallet Check</span></div></div><div class="forklift">🏗️</div><div class="success-burst">GO!</div></div>
+          </div></div>
+        <div class="story-controls"><div id="storyStep">Scene 1 / 4</div><div class="story-buttons"><button class="secondary small" id="storyBack" disabled>Back</button><button class="secondary small" id="storyNext">Next</button></div></div>
+      </section><button class="primary full" id="startMission">Start Mission</button>
     </section>
-
-    <section class="page" id="asnPage">
-      <div class="badge">Step 1 of 2</div>
-      <div class="mission-strip"><strong>🚛 Shipment arrived • Target: 60 sec</strong><span class="timer" id="timer1">00:00</span></div>
-      <div class="section-title"><h2>Match the Dummy Invoice</h2><p>Look at the printed Dummy Invoice. Tap each ASN field, then choose the matching answer from the pop-up.</p></div>
-      <div class="hint">Tip: tap one ASN field at a time. The answer choices will pop up, so you do not need to scroll down.</div>
-      <div class="message" id="asnMessage"></div>
-      <div class="game-grid single-grid">
-        <section class="panel"><h3>ASN Fields</h3><div id="fieldList"></div></section>
-      </div>
-      <div class="actions"><button class="primary" id="checkAsn">Check ASN Entry</button><button class="secondary" id="restartAsn">Restart</button></div>
-    </section>
-
-    <section class="page" id="huPage">
-      <div class="badge">Step 2 of 2</div>
-      <div class="mission-strip"><strong>📦 Final step • Choose the pallet</strong><span class="timer" id="timer2">00:00</span></div>
-      <div class="section-title"><h2>Choose the Pallet That Fits</h2><p>Compare the pallet size with the rack. Tap the button to open the pallet options.</p></div>
-      <div class="message" id="huMessage"></div>
-      <div class="game-grid">
-        <section class="panel">
-          <h3>Rack Dimension</h3>
-          <div class="rack-visual"><div class="rack-frame"><i></i><b></b></div><span class="dh">H 500</span><span class="dw">W 800</span><span class="dl">L 1200</span></div>
-          <p>Dimension: <strong>1200 × 800 × 500 mm</strong></p>
-        </section>
-        <section class="panel pallet-test-panel">
-          <h3>Pallet Fit Test</h3>
-          <div class="hint compact">Choose a pallet. The game will automatically try to place it into the rack.</div>
-          <div class="fit-test" id="fitTest" aria-live="polite">
-            <div class="fit-rack">
-              <div class="fit-rack-top"></div><div class="fit-rack-left"></div><div class="fit-rack-right"></div><div class="fit-rack-base"></div>
-              <div class="fit-rack-label">RACK<br><small>1200 × 800 × 500</small></div>
-            </div>
-            <div class="test-pallet idle" id="testPallet">
-              <div class="pallet-load" id="palletLoad"></div><div class="pallet-base"></div><div class="pallet-name" id="testPalletName">Choose a pallet</div>
-            </div>
-            <div class="fit-result" id="fitResult"></div>
-          </div>
-          <div id="palletPreview" class="selection-preview">No pallet selected yet.</div>
-          <button class="primary full" id="openPalletPicker">Choose Pallet Option</button>
-        </section>
-      </div>
-      <div class="actions"><button class="secondary" id="restartHu">Restart</button></div>
-    </section>
-
-    <section class="page" id="donePage">
-      <div class="done">
-        <div class="done-check">✓</div>
-        <div class="badge">Mission Complete</div>
-        <h2>ASN Created</h2>
-        <p>Great job — you helped Receiving continue the inbound process.</p>
-        <div><p>Your Time</p><div class="final-time" id="finalTime">00:00</div></div>
-        <div class="summary">
-          <div>✅ Correct invoice information matched</div>
-          <div>✅ Correct pallet selected</div>
-          <div>✅ Packaging Material <strong>6000.115.761</strong> • HU Type <strong>E105</strong></div>
-        </div>
-        <p><strong>Challenge a colleague to beat your time!</strong></p>
-        <button class="primary" id="playAgain">Play Again</button>
-      </div>
-    </section>
+    <section class="page" id="asnPage"><div class="badge">Step 1 of 2</div><div class="mission-strip"><strong>🚛 Shipment arrived • Target: 60 sec</strong><span class="timer" id="timer1">00:00</span></div><div class="section-title"><h2>Match the Dummy Invoice</h2><p>Look at the printed Dummy Invoice. Tap each ASN field, then choose the matching answer from the pop-up.</p></div><div class="hint">Tip: tap one ASN field at a time. The answer choices will pop up, so you do not need to scroll down.</div><div class="message" id="asnMessage"></div><div class="game-grid single-grid"><section class="panel"><h3>ASN Fields</h3><div id="fieldList"></div></section></div><div class="actions"><button class="primary" id="checkAsn">Check ASN Entry</button><button class="secondary" id="restartAsn">Restart</button></div></section>
+    <section class="page" id="huPage"><div class="badge">Step 2 of 2</div><div class="mission-strip"><strong>📦 Final step • Choose the pallet</strong><span class="timer" id="timer2">00:00</span></div><div class="section-title"><h2>Choose the Pallet That Fits</h2><p>Compare the pallet size with the rack. Tap the button to open the pallet options.</p></div><div class="message" id="huMessage"></div><div class="game-grid"><section class="panel"><h3>Rack Dimension</h3><div class="rack-visual"><div class="rack-frame"><i></i><b></b></div><span class="dh">H 500</span><span class="dw">W 800</span><span class="dl">L 1200</span></div><p>Dimension: <strong>1200 × 800 × 500 mm</strong></p></section><section class="panel pallet-test-panel"><h3>Pallet Fit Test</h3><div class="hint compact">Choose a pallet. The game will automatically try to place it into the rack.</div><div class="true3d-wrap" id="fitTest" aria-live="polite"><canvas id="rackCanvas" class="rack-canvas" aria-label="3D pallet rack simulation"></canvas><div class="canvas-badge">OFFLINE 3D SIMULATION</div><div class="canvas-dimension">Rack Opening<br><strong>1200 × 800 × 500 mm</strong></div><div class="fit-result canvas-result" id="fitResult"></div><div class="canvas-help" id="canvasHelp">Choose a pallet to start the 3D fit test.</div></div><div id="palletPreview" class="selection-preview">No pallet selected yet.</div><button class="primary full" id="openPalletPicker">Choose Pallet Option</button></section></div><div class="actions"><button class="secondary" id="restartHu">Restart</button></div></section>
+    <section class="page" id="donePage"><div class="done"><div class="done-check">✓</div><div class="badge">Mission Complete</div><h2>ASN Created</h2><p>Great job — you helped Receiving continue the inbound process.</p><div><p>Your Time</p><div class="final-time" id="finalTime">00:00</div></div><div class="summary"><div>✅ Correct invoice information matched</div><div>✅ Correct pallet selected</div><div>✅ Packaging Material <strong>6000.115.761</strong> • HU Type <strong>E105</strong></div></div><p><strong>Challenge a colleague to beat your time!</strong></p><button class="primary" id="playAgain">Play Again</button></div></section>
   </section>
 </main>
-<script src="app.js"></script>
+<script src="app-v13-1.js?v=13"></script>
+<script src="app-v13-2.js?v=13"></script>
+<script src="app-v13-3.js?v=13"></script>
 </body>
 </html>
